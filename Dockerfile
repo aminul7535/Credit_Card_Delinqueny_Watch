@@ -2,16 +2,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# copy only requirements first for caching
+# Install requirements
 COPY backend/requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy backend code
+# Copy backend source
 COPY backend /app
 
-# optional: default PORT if not provided (Railway sets PORT)
-ENV PORT=8000
+# Railway will inject PORT (usually 8080)
+ENV PORT=8080
 
-# use sh -c so shell expands $PORT at runtime
+# Start FastAPI using the injected port
 CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT}"]
