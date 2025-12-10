@@ -11,7 +11,7 @@
 
 ---
 
-# 📄 **Credit Card Delinquency Watch — Early Risk Detection Dashboard**
+## 📄 **Credit Card Delinquency Watch — Early Risk Detection Dashboard**
 
 <p align="center">
   <img src="docs/images/Dashboarda.png" width="750">
@@ -217,7 +217,9 @@ Provides an operational view used by risk analysts:
 <p align="center">
   <img src="docs/images/Dashboarda.png" width="700"><br><br>
   <img src="docs/images/Screenshoot2.png" width="700"><br><br>
-  <img src="docs/images/Screenshoot5.png" width="700">
+  <img src="docs/images/screenshoot4.png" width="700"><br><br>
+  <img src="docs/images/screenshoot5.png" width="700"><br><br>
+  <img src="docs/images/screenshoot3.png" width="700">
 </p>
 
 ---
@@ -238,6 +240,6 @@ Provides an operational view used by risk analysts:
 B.Tech CSE — Gauhati University
 📧 Email: **[aminul7535@gmail.com](mailto:aminul7535@gmail.com)**
 
-*Passionate about applied AI, credit risk analytics, and full-stack engineering.*
+*Passionate about applied AI, Data analytics, and full-stack engineering.*
 
 ---
