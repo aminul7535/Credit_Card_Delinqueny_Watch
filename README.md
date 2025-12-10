@@ -1,86 +1,132 @@
-# 📄 **README — Credit Card Delinquency Watch (Early Risk Detection Dashboard)**
+# 📄 **Credit Card Delinquency Watch — Early Risk Detection Dashboard**
+
+---
+
+## 📊 **Project Presentation**
+
+* 👉 **[Download PowerPoint (PPTX)](docs/presentation/Presentation.pptx)**
+* 👉 **[View PDF Version](docs/presentation/Presentation.pdf)**
+
+> 📌 **Evaluators are requested to view the PPT first** for a complete walkthrough of the system and workflow.
+
+---
+
+# 📄 **Credit Card Delinquency Watch — Early Risk Detection Dashboard**
+
+<p align="center">
+  <img src="docs/images/Dashboarda.png" width="750">
+</p>
+
+---
+
+
+## 🚀 **Overview**
+
+**Credit Card Delinquency Watch** is an end-to-end system designed to detect **early warning signals** in customer repayment behaviour.
+It simulates how modern banks proactively identify customers who may become delinquent in the coming months.
+
+This tool enables risk teams to:
+
+* Upload monthly behavioural customer data
+* Generate **interpretable risk scores**
+* Categorize customers into **Low / Medium / High Risk**
+* View customer-level insights, explanations, and recommended actions
+* Monitor portfolio health with clean visual analytics
+
+---
 
 ## 📦 **How to Run Locally**
 
-### 1️⃣ Clone the repo
+### 🖥️ **Backend Setup**
 
-git clone https://github.com/your-repo/delinquency-watch.git
-cd delinquency-watch
-
-## 🖥️ **Backend Setup**
+```bash
 cd backend
 python -m venv .venv
+```
 
-## Activate virtual environment (Windows)
+#### Activate Virtual Environment (Windows)
+
+```bash
 .\.venv\Scripts\activate
+```
 
-## Install dependencies
+#### Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-## Start the backend server
+#### Start Backend Server
+
+```bash
 python -m uvicorn app:app --reload --port 8000
+```
 
-## Backend runs at:
-http://127.0.0.1:8000
+Backend runs at: **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
 
-## 🌐 **Frontend Setup**
+---
+
+### 🌐 **Frontend Setup**
+
+```bash
 cd frontend
 npm install
 npm run dev
-Frontend runs on: http://localhost:5173
+```
 
+Frontend runs on: **[http://localhost:5173](http://localhost:5173)**
 
-## 📤 **How to Use**
+---
 
-1. Open the dashboard
-2. Click **Choose CSV → And select that dataset located in the data/ folder (e.g., dataset1.csv or dataset2.csv) → Upload**
-3. Dashboard updates instantly:
-   * Risk categories
-   * Graphs
-   * Customer table
-4. Click **View** on any customer:
-   * Risk explanation
-   * Top contributors
-   * Suggested actions
-   * Raw values
+## 📤 **How to Use the Dashboard**
 
+1. Open the dashboard in your browser  
+2. Click **Choose CSV → Select dataset from the `data/` folder inside the project**  
+3. Recommended demo files (already cleaned and formatted for the system):  
+   - `data/dataset1.csv`  
+   - `data/dataset2.csv`  
 
-## 🚀 Overview
+   > 📌 **Please use the sample datasets above for testing.**  
+   > They are pre-cleaned, correctly structured, and aligned with the scoring engine requirements.
 
-**Credit Card Delinquency Watch** is an end-to-end system that detects early signs of credit-risk behaviour in credit card customers using a rule-based scoring engine and a clean, interactive dashboard.
+4. After uploading, the dashboard automatically updates:  
+   - Risk categories (Low / Medium / High)  
+   - KPI tiles  
+   - Risk distribution pie  
+   - Feature-level averages  
+   - Customer table  
 
-The tool allows risk teams to:
-
-* Upload monthly customer data
-* Automatically generate risk scores
-* Classify customers into **Low / Medium / High** risk
-* View customer-level explanations & top contributors
-* Trigger suggested early interventions
-
-It is designed to simulate how banks (like HDFC / SBI / ICICI) monitor portfolio health for early delinquency prevention.
+5. Click **View** next to any customer to see:  
+   - Individual risk explanation  
+   - Top contributing behavioural features  
+   - Suggested actions  
+   - Raw values for audit  
 
 ---
 
 ## 🎯 **Problem Statement**
 
-Banks face financial losses when customers become delinquent (miss payments, roll to DPD 1–30 → DPD 31–60 → DPD 61+).
-Traditional systems detect risk **too late**.
+Banks lose substantial revenue when customers transition through delinquency stages (DPD 1–30 → 31–60 → 61+).
+Traditional systems react **late**, after risk has already escalated.
 
-This project solves:
-✔ Early detection of high-risk customers
-✔ Explainable risk scoring
-✔ Clear recommended interventions
-✔ Portfolio-level insights for monitoring
+This project addresses:
+
+✔ Early detection of risky behavioural patterns
+✔ Transparent and interpretable risk scoring
+✔ Customer-level explanations
+✔ Portfolio monitoring tools for risk managers
 
 ---
 
-## 🧠 **Approach**
+## 🧠 **Approach & Architecture**
 
-The system follows a **3-layered risk evaluation pipeline**:
+The system uses a **3-layer risk evaluation pipeline**:
+
+---
 
 ### **1️⃣ Data Sanitization**
 
-Converts raw CSV inputs into clean numerical features:
+Converts raw CSVs into clean structured inputs:
 
 * Utilisation %
 * Avg Payment Ratio
@@ -88,102 +134,110 @@ Converts raw CSV inputs into clean numerical features:
 * Merchant Mix Index
 * Cash Withdrawal %
 * Recent Spend Change %
-* DPD Bucket Next Month (label)
+* Next Month DPD Bucket (label)
 
-### **2️⃣ Risk Scoring Engine (scoring.py)**
+---
 
-A custom interpretable formula assigns score (0–1):
+### **2️⃣ Risk Scoring Engine (`scoring.py`)**
 
-* Spend Change (increase/decrease)
-* Avg Payment & Min Due Frequency
-* Utilisation
-* Cash Withdrawals
-* Merchant Mix (low diversification → higher risk)
+A custom interpretable model generates:
 
-It outputs:
-
-* `risk_score`
+* `risk_score` (0–1)
 * `risk_class`
 * `top3_contributors`
 * `recommended_actions`
 
+Scoring is based on:
+
+* Spend change behaviour
+* Payment frequency
+* Utilisation band
+* Cash withdrawal patterns
+* Merchant diversification
+
+---
+
 ### **3️⃣ Interactive Dashboard (React)**
 
-Built for real operational usage:
+Provides an operational view used by risk analysts:
 
-* KPI summary cards
-* Pie chart distribution
-* Bar chart feature averages
-* Risk window slider for filtering customers
-* Customer Drawer with full details & suggested actions
+* KPI Summary Cards
+* Pie Chart (Risk Distribution)
+* Bar Chart (Feature Averages)
+* Double-handle **Risk Window Slider**
+* Customer Detail Drawer with explanations
 
 ---
 
 ## ⭐ **Key Features**
 
-### Portfolio-Level
+### 📊 **Portfolio-Level Insights**
 
-* 📊 **KPI tiles**: High / Medium / Low risk counts
-* 🥧 **Risk distribution pie chart**
-* 📈 **Feature averages bar chart**
-* 🎚️ **Risk Window slider** to view top/high/medium/low customers
+* High / Medium / Low risk KPI tiles
+* Pie chart for quick distribution overview
+* Bar chart of key behavioural features
+* Risk Window slider for dynamic filtering
 
-### Customer-Level
+### 👤 **Customer-Level Insights**
 
-* 🔍 Detailed drawer with profile
-* 💡 Suggested next steps (EMI restructuring, reminders, limit suggestions)
-* 🧩 Top risk contributors with visual bars
-* 🧾 Full raw row values
-* 📋 Copy JSON button for debugging
+* Full profile details
+* Top contributors to risk
+* Suggested actions (EMI restructuring, reminders, etc.)
+* Raw feature values for audit
+* Copy JSON for debugging
 
 ---
 
 ## 🛠️ **Tech Stack**
 
-### Backend
+### **Backend**
 
 * Python
 * FastAPI
-* Custom scoring engine
-* CSV ingestion + processing
+* Custom Scoring Engine
+* CSV Ingestion & Processing
 
-### Frontend
+### **Frontend**
 
 * React
 * TailwindCSS
 * Chart.js
 * Vite
 
-### Other
+### **Other**
 
-* Synthetic & realistic datasets
-* Fully offline scoring
-* No external ML model dependency
-
----
-
-
-
+* Synthetic realistic datasets
+* Offline scoring pipeline
+* Zero ML model dependency (fast + interpretable)
 
 ---
 
-## 🖼️ **Screenshot of the Dashboard**
-![alt text](image.png)
+<h2>🖼️ Dashboard Screenshots</h2>
+
+<p align="center">
+  <img src="docs/images/Dashboarda.png" width="700"><br><br>
+  <img src="docs/images/Screenshoot2.png" width="700"><br><br>
+  <img src="docs/images/Screenshoot5.png" width="700">
+</p>
+
+---
 
 ## 🏁 **Future Enhancements**
 
 * ML-based scoring (Logistic Regression / XGBoost)
-* Real transaction time-series visualization
-* Automated customer calling/SMS triggers
-* Case management panel
-* Advanced segmentation engine
+* Time-series behavioural trend analysis
+* Automated SMS / Email triggers
+* Case management workflow
+* Advanced customer segmentation engine
 
 ---
 
-## 👤 Made by
+## 👤 **Made By**
 
 **Aminul Islam (Bulbul)**
 B.Tech CSE — Gauhati University
-Email: aminul7535@gmail.com
+📧 Email: **[aminul7535@gmail.com](mailto:aminul7535@gmail.com)**
 
-Passionate about applied AI, credit risk, and full-stack engineering.
+*Passionate about applied AI, credit risk analytics, and full-stack engineering.*
+
+---

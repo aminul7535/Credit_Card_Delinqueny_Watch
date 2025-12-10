@@ -1,5 +1,6 @@
-import LogoSmall from "./logo.png";
 // src/App.jsx
+
+import LogoSmall from "./logo.png";
 import React, { useEffect, useState } from 'react';
 import { uploadCSV, getSummary, downloadScoredCSV } from './api';
 import KPI from './components/KPI';
@@ -135,7 +136,7 @@ export default function App() {
                 {/* --- Footer Note --- */}
 
                 <footer className="fixed bottom-0 left-0 right-0 w-full z-40">
-                    <div className="w-full bg-white/95 backdrop-blur-sm border-t border-gray-200">
+                    <div className="w-full bg-white/95 backdrop-blur-sm border-t border-black-200">
                         <div className="max-w-screen-xl mx-auto px-4">
                             <div className="flex items-center justify-between gap-4 py-1">
                                 {/* LEFT: logo + project text */}
