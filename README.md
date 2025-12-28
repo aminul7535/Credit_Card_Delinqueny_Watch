@@ -3,8 +3,6 @@
 ---
 
 
-## 📄 **Credit Card Delinquency Watch — Early Risk Detection Dashboard**
-
 <p align="center">
   <img src="docs/images/Dashboarda.png" width="750">
 </p>
