@@ -2,14 +2,6 @@
 
 ---
 
-## 📊 **Project Presentation**
-
-* 👉 **[Download PowerPoint (PPTX)](docs/presentation/Presentation.pptx)**
-* 👉 **[View PDF Version](docs/presentation/Presentation.pdf)**
-
-> 📌 **Evaluators are requested to view the PPT first** for a complete walkthrough of the system and workflow.
-
----
 
 ## 📄 **Credit Card Delinquency Watch — Early Risk Detection Dashboard**
 
